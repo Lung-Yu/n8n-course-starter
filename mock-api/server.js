@@ -265,6 +265,9 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 404, { error: 'not found' });
     }
 
+    // README / 講稿的驗證指令打的是 /api/health
+    if (parts[1] === 'health' && !parts[2]) return sendJson(res, 200, { status: 'ok' });
+
     // ---- 新增：GET /api/certificates（Lab C）----
     if (parts[1] === 'certificates' && !parts[2] && req.method === 'GET') {
       const certs = buildCertificates();
